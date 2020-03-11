@@ -1,28 +1,11 @@
-.table table {
-      font-size: 20px;
-      text-align: center;
-      margin: 0 auto;
+.header{
       margin-top: 100px;
 }
 
-.table td {
-      border: none;
+#game{
+      margin-top: 100px;
 }
 
-.table img {
-      display: block;
-      margin: 0 auto;
-      width: 50%;
+#game, img {
+      width: 100%;
 }
-
-.memory-card {
-      margin: 5px;
-      position: relative;
-    }
-    
-.img-back, .img-front  {
-
-      padding: 20px;
-      position: absolute;
-      border-radius: 5px;
-    }
