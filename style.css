@@ -1,28 +1,15 @@
-.table table {
-      font-size: 20px;
-      text-align: center;
-      margin: 0 auto;
+.board{
       margin-top: 100px;
 }
 
-.table td {
-      border: none;
-}
-
-.table img {
-      display: block;
+.game {
       margin: 0 auto;
-      width: 50%;
 }
 
-.memory-card {
-      margin: 5px;
-      position: relative;
-    }
-    
-.img-back, .img-front  {
+.game img {
+      width: 10vw;
+}
 
-      padding: 20px;
-      position: absolute;
-      border-radius: 5px;
-    }
+.disable {
+	pointer-events: none;
+}

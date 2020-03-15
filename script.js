@@ -1,57 +1,63 @@
-var idx_list = []
-var counter = 0
-var max = 10
-var cartes = ['image1', 'image1', 'image2', 'image2', 'image3', 'image3'];
+var cardOpen = []
+var cardMatch = []
 
-function board(){
-    for(var i = 0; i < 6; i++){
-        var td = document.createElement('td');
-        var div = document.createElement('div');
-        var img_back = document.createElement('img');
-        var img_front = document.createElement('img');
-        var idx = Math.floor(Math.random() * 6);
+var cards = document.querySelectorAll('.card-class');
 
-        while (idx_list.includes(idx)) { // Boucle while qui vérifie si il y à un doublon
-            counter++
-            idx = Math.floor(Math.random() * 6);
-            if (counter === max) { // Permet d'éviter une boucle infini
-                break;
-            }
-        }
-        idx_list.push(idx)
+cards.forEach(cards => {
+    cards.addEventListener('click', function(){
+        flipCard(this);
+        this.classList.add('disable')
+        checkEnd()
+    })
+});
 
-        if (!(i % 3)) {
-            tr = document.createElement('tr');
-            document.getElementById('card_table').appendChild(tr);
-        }
-        td.appendChild(document.createTextNode(cartes[idx]));
+function flipCard(card){
+    cardOpen.push(card)
+    card.src = 'card-front.png'
 
-        div.setAttribute("class", "memory-card");
-        div.setAttribute('onclick', 'flipCard()')
-
-        //img.src = "img-" + idx + ".png";
-        img_back.setAttribute("id", cartes[idx]);
-        img_back.setAttribute("class", "img-back");
-        img_back.src = "card.png";
-        img_back.setAttribute("onclick", "check(this);");
-
-        img_front.setAttribute("class", "img-front");
-        img_front.src = "card-front.png";
-
-        td.appendChild(div);
-        div.appendChild(img_back);
-        div.appendChild(img_front);
-        tr.appendChild(td);
+    if(cardOpen.length == 2){
+        disable()
+        check()
     }
 }
 
-function check(card){
-    console.log(card.id);
+function check(){
+    if(cardOpen[0].id == cardOpen[1].id){
+        console.log('match !')
+        cardMatch.push(cardOpen[0])
+        cardMatch.push(cardOpen[1])
+        setTimeout(function(){
+            cardOpen = []
+            enable()
+        },1000);
+    }
+    else{
+        setTimeout(function(){
+            cardOpen[0].src = "card.png"
+            cardOpen[1].src = "card.png"
+            cardOpen = []
+            enable()
+        },1000);
+    }
 }
 
-function flipCard(){
-    //this.classList.toggle('flip');
-    console.log("flip");
+function enable(){
+    cards.forEach(cards => {
+        cards.classList.remove('disable')
+        for(var i = 0; i < cardMatch.length; i++){
+            cardMatch[i].classList.add('disable')
+        }
+    })
 }
 
-board();
+function disable(){
+    cards.forEach(cards => {
+        cards.classList.add('disable')
+    })
+}
+
+function checkEnd(){
+    if(cardMatch.length == 6){
+        console.log("You win !")
+    }
+}
