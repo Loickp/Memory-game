@@ -2,11 +2,11 @@
       margin-top: 100px;
 }
 
-.game {
+#game {
       margin: 0 auto;
 }
 
-.game img {
+#game img {
       width: 10vw;
 }
 
