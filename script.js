@@ -1,23 +1,26 @@
 var cardOpen = []
 var cardMatch = []
-
-var cards_list = ['card-1', 'card-1', 'card-2', 'card-2', 'card-3', 'card-3']
-var idx_list = []
-var max = 6
-var counter = 0
+var cards_list = [
+    {id: 'AH', src: 'cards/AH.png'},
+    {id: '2H', src: 'cards/2H.png'},
+    {id: '3H', src: 'cards/3H.png'},
+    {id: 'AH', src: 'cards/AH.png'},
+    {id: '2H', src: 'cards/2H.png'},
+    {id: '3H', src: 'cards/3H.png'}
+]
 
 function shuffle(array){
     var currentIndex = array.length;
 	var temporaryValue, randomIndex;
 
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-		// Pick a remaining element...
+	// Boucle pour chaque elements de la liste
+	while (currentIndex !== 0) {
+		// Prend un element au hazard
 		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
+        currentIndex -= 1;
 
 		// And swap it with the current element.
-		temporaryValue = array[currentIndex];
+        temporaryValue = array[currentIndex];
 		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = temporaryValue;
 	}
@@ -27,7 +30,9 @@ function shuffle(array){
 
 function board(){
     var table = document.getElementById('game')
+    var cards = document.querySelectorAll('.card-class');
     var card_shuffle = shuffle(cards_list);
+    console.log(card_shuffle)
 
     for(var i = 0; i < 6; i++){
         var td = document.createElement('td')
@@ -38,19 +43,18 @@ function board(){
             table.appendChild(tr)
         }
 
-        img.src = "card.png"
+        img.src = "cards/card.png"
         img.setAttribute('class', 'card-class')
-        img.setAttribute('id', card_shuffle[i])
+        img.setAttribute('id', card_shuffle[i].id)
 
         tr.appendChild(td)
-        td.appendChild(img)  
+        td.appendChild(img)
     }
 }
 
 board()
 
 var cards = document.querySelectorAll('.card-class');
-console.log(cards)
 
 cards.forEach(cards => {
     cards.addEventListener('click', function(){
@@ -62,7 +66,12 @@ cards.forEach(cards => {
 
 function flipCard(card){
     cardOpen.push(card)
-    card.src = 'card-front.png'
+
+    var crd = cards_list.filter(cards =>{
+        return cards.id == card.id
+    })
+
+    card.src = crd[0].src
 
     if(cardOpen.length == 2){
         disable()
@@ -82,8 +91,8 @@ function check(){
     }
     else{
         setTimeout(function(){
-            cardOpen[0].src = "card.png"
-            cardOpen[1].src = "card.png"
+            cardOpen[0].src = "cards/card.png"
+            cardOpen[1].src = "cards/card.png"
             cardOpen = []
             enable()
         },1000);
