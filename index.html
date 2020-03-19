@@ -8,10 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="board">
-            <table id="game">
-            </table>
+        <div class="header text-center">
+            <h1>Memory game</h1>
+            <div id="mode">
+                <button class="btn btn-primary" id="btn-1" value="6cards" onclick="startGame(this)">6 cards</button>
+                <button class="btn btn-primary" id="btn-2" value="18cards" onclick="startGame(this)">18 cards</button>
+            </div>
         </div>
+    </div>
+    <div class="board">
+        <table id="game">
+        </table>
     </div>
     
 

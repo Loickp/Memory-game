@@ -1,13 +1,21 @@
-.board{
-      margin-top: 100px;
+.header{    
+      margin-top: 50px;
 }
 
-#game {
+#mode{
+      margin-top: 30px;
+}
+
+.board table{
       margin: 0 auto;
 }
 
+#game {
+      margin-top: 20px;
+}
+
 #game img {
-      width: 10vw;
+      width: 9vw;
 }
 
 .disable {

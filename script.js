@@ -1,6 +1,7 @@
+var counter = 0
 var cardOpen = []
 var cardMatch = []
-var cards_list = [
+var cards_list_6 = [
     {id: 'AH', src: 'cards/AH.png'},
     {id: '2H', src: 'cards/2H.png'},
     {id: '3H', src: 'cards/3H.png'},
@@ -8,6 +9,43 @@ var cards_list = [
     {id: '2H', src: 'cards/2H.png'},
     {id: '3H', src: 'cards/3H.png'}
 ]
+var cards_list_18 = [
+    {id: 'AH', src: 'cards/AH.png'},
+    {id: '2H', src: 'cards/2H.png'},
+    {id: '3H', src: 'cards/3H.png'},
+    {id: '4H', src: 'cards/4H.png'},
+    {id: '5H', src: 'cards/5H.png'},
+    {id: '6H', src: 'cards/6H.png'},
+    {id: '7H', src: 'cards/7H.png'},
+    {id: '8H', src: 'cards/8H.png'},
+    {id: '9H', src: 'cards/9H.png'},
+    {id: 'AH', src: 'cards/AH.png'},
+    {id: '2H', src: 'cards/2H.png'},
+    {id: '3H', src: 'cards/3H.png'},
+    {id: '4H', src: 'cards/4H.png'},
+    {id: '5H', src: 'cards/5H.png'},
+    {id: '6H', src: 'cards/6H.png'},
+    {id: '7H', src: 'cards/7H.png'},
+    {id: '8H', src: 'cards/8H.png'},
+    {id: '9H', src: 'cards/9H.png'}
+]
+
+// 6 cartes : 3/2
+// 18 cartes : 6/3
+
+function startGame(mode){
+    var value = mode.value
+    var btn = document.getElementById('mode')
+
+    if(value == "6cards"){
+        board(cards_list_6, 6, 3)
+        btn.style.display = "none";
+    }
+    else{
+        board(cards_list_18, 18, 6)
+        btn.style.display = "none";
+    }
+}
 
 function shuffle(array){
     var currentIndex = array.length;
@@ -28,17 +66,15 @@ function shuffle(array){
 	return array;
 }
 
-function board(){
+function board(cards_list, nb_card, column){
     var table = document.getElementById('game')
-    var cards = document.querySelectorAll('.card-class');
     var card_shuffle = shuffle(cards_list);
-    console.log(card_shuffle)
 
-    for(var i = 0; i < 6; i++){
+    for(var i = 0; i < nb_card; i++){
         var td = document.createElement('td')
         var img = document.createElement('img')
 
-        if(!(i % 3)){
+        if(!(i % column)){
             var tr = document.createElement('tr')
             table.appendChild(tr)
         }
@@ -50,21 +86,19 @@ function board(){
         tr.appendChild(td)
         td.appendChild(img)
     }
+
+    var cards = document.querySelectorAll('.card-class');
+
+    cards.forEach(cards => {
+        cards.addEventListener('click', function(){
+            flipCard(this, cards_list);
+            this.classList.add('disable')
+            checkEnd(cards_list)
+        })
+    });
 }
 
-board()
-
-var cards = document.querySelectorAll('.card-class');
-
-cards.forEach(cards => {
-    cards.addEventListener('click', function(){
-        flipCard(this);
-        this.classList.add('disable')
-        checkEnd()
-    })
-});
-
-function flipCard(card){
+function flipCard(card, cards_list){
     cardOpen.push(card)
 
     var crd = cards_list.filter(cards =>{
@@ -100,6 +134,8 @@ function check(){
 }
 
 function enable(){
+    var cards = document.querySelectorAll('.card-class');
+
     cards.forEach(cards => {
         cards.classList.remove('disable')
         for(var i = 0; i < cardMatch.length; i++){
@@ -109,17 +145,15 @@ function enable(){
 }
 
 function disable(){
+    var cards = document.querySelectorAll('.card-class');
+
     cards.forEach(cards => {
         cards.classList.add('disable')
     })
 }
 
-function checkEnd(){
-    if(cardMatch.length == 6){
+function checkEnd(cards_list){
+    if(cardMatch.length == cards_list.length){
         console.log("You win !")
-
-        /*cards.forEach(cards => {
-            cards.src = "card.png"
-        })*/
     }
 }
