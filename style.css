@@ -21,3 +21,33 @@
 .disable {
 	pointer-events: none;
 }
+
+#counter p {
+      display: inline;
+}
+
+#timer p {
+      display: inline;
+}
+
+#counter, #timer{
+      margin-top: 20px;
+      display: none;
+}
+
+#counter{
+      padding-right: 50px;
+}
+
+#game-over{
+      margin-top: 20px;
+      display: none;
+}
+
+#game-over p{
+      display: inline;
+}
+
+#end-count {
+      padding-right: 50px;
+}

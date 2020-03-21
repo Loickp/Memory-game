@@ -1,6 +1,8 @@
 var counter = 0
+
 var cardOpen = []
 var cardMatch = []
+
 var cards_list_6 = [
     {id: 'AH', src: 'cards/AH.png'},
     {id: '2H', src: 'cards/2H.png'},
@@ -36,14 +38,22 @@ var cards_list_18 = [
 function startGame(mode){
     var value = mode.value
     var btn = document.getElementById('mode')
+    var counter = document.getElementById('counter')
+    var timer = document.getElementById('timer')
 
     if(value == "6cards"){
         board(cards_list_6, 6, 3)
-        btn.style.display = "none";
+        btn.style.display = "none"
+        counter.style.display = "inline-block"
+        timer.style.display = "inline-block"
+        chronoStart()
     }
     else{
         board(cards_list_18, 18, 6)
         btn.style.display = "none";
+        counter.style.display = "inline-block"
+        timer.style.display = "inline-block"
+        chronoStart()
     }
 }
 
@@ -110,6 +120,7 @@ function flipCard(card, cards_list){
     if(cardOpen.length == 2){
         disable()
         check()
+        count()
     }
 }
 
@@ -150,10 +161,77 @@ function disable(){
     cards.forEach(cards => {
         cards.classList.add('disable')
     })
+
 }
 
 function checkEnd(cards_list){
     if(cardMatch.length == cards_list.length){
         console.log("You win !")
+        console.log(counter)
+        console.log(time)
+        chronoStop()
+        end_game()
     }
+}
+
+function end_game(){
+    var board = document.getElementById('game')
+    var endgame = document.getElementById('game-over')
+    var end_count = document.getElementById('end-count')
+    var end_time = document.getElementById('end-time')
+
+    board.style.display = "none"
+    endgame.style.display = "inline-block"
+
+    end_count.innerHTML = counter
+    end_time.innerHTML = time
+}
+
+function count(){
+    var count = document.getElementById('count');
+
+    counter++;
+    count.innerHTML = counter
+}
+
+
+var startTime = 0
+var start = 0
+var end = 0
+var diff = 0
+var timerID = 0
+var time = 0
+
+function chrono(){
+	end = new Date()
+	diff = end - start
+	diff = new Date(diff)
+	var msec = diff.getMilliseconds()
+	var sec = diff.getSeconds()
+	var min = diff.getMinutes()
+
+	if (min < 10){
+		min = "0" + min
+	}
+	if (sec < 10){
+		sec = "0" + sec
+	}
+	if(msec < 10){
+		msec = "00" +msec
+	}
+	else if(msec < 100){
+		msec = "0" +msec
+    }
+    time = min + ":" + sec + ":" + msec
+	document.getElementById("time").innerHTML = time
+	timerID = setTimeout("chrono()", 10)
+}
+
+function chronoStart(){
+	start = new Date()
+	chrono()
+}
+
+function chronoStop(){
+	clearTimeout(timerID);
 }
