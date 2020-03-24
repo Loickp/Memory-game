@@ -32,19 +32,20 @@ var cards_list_18 = [
     {id: '9H', src: 'cards/9H.png'}
 ]
 
-// 6 cartes : 3/2
-// 18 cartes : 6/3
-
 function startGame(mode){
     var value = mode.value
     var header = document.getElementById('header')
+    var header_text = document.getElementById('header-text')
     var btn = document.getElementById('mode')
+    var info = document.getElementById('info')
     var counter = document.getElementById('counter')
     var timer = document.getElementById('timer')
 
     if(value == "6cards"){
         board(cards_list_6, 6, 3)
         header.style.marginTop = "50px"
+        header_text.style.display = "none"
+        info.style.backgroundColor = "rgba(0,0,0, 0.25)"
         btn.style.display = "none"
         counter.style.display = "inline-block"
         timer.style.display = "inline-block"
@@ -54,6 +55,8 @@ function startGame(mode){
         board(cards_list_18, 18, 6)
         header.style.marginTop = "50px"
         btn.style.display = "none";
+        header_text.style.display = "none"
+        info.style.backgroundColor = "rgba(0,0,0, 0.25)"
         counter.style.display = "inline-block"
         timer.style.display = "inline-block"
         chronoStart()
@@ -219,7 +222,7 @@ function chrono(){
 	else if(msec < 100){
 		msec = "0" +msec
     }
-    time = min + ":" + sec + ":" + msec
+    time = min + ":" + sec
 	document.getElementById("time").innerHTML = time
 	timerID = setTimeout("chrono()", 10)
 }
