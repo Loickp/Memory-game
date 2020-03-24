@@ -4,6 +4,8 @@ body {
       background-image: url('background.jpg');
 }
 
+/* Header */
+
 #header{    
       margin-top: 40vh;
 }
@@ -23,21 +25,7 @@ body {
       padding: 10px 20px;
 }
 
-.board table{
-      margin: 0 auto;
-}
-
-#game {
-      margin-top: 20px;
-}
-
-#game img {
-      width: 9vw;
-}
-
-.disable {
-	pointer-events: none;
-}
+/* Info game (counter, timer) */
 
 #info {
       text-align: center;
@@ -65,6 +53,26 @@ body {
 #counter{
       padding-right: 50px;
 }
+
+/* Board game */
+
+.board table{
+      margin: 0 auto;
+}
+
+#game {
+      margin-top: 20px;
+}
+
+#game img {
+      width: 9vw;
+}
+
+.disable {
+	pointer-events: none;
+}
+
+/* Win modal */
 
 .over-count p{
       display: inline;

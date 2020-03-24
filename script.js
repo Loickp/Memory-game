@@ -1,8 +1,6 @@
 var counter = 0
-
 var cardOpen = []
 var cardMatch = []
-
 var cards_list_6 = [
     {id: 'AH', src: 'cards/AH.png'},
     {id: '2H', src: 'cards/2H.png'},
@@ -31,6 +29,8 @@ var cards_list_18 = [
     {id: '8H', src: 'cards/8H.png'},
     {id: '9H', src: 'cards/9H.png'}
 ]
+
+/* Function to start game */
 
 function startGame(mode){
     var value = mode.value
@@ -63,6 +63,8 @@ function startGame(mode){
     }
 }
 
+/* Function to shuffle cards in the list */
+
 function shuffle(array){
     var currentIndex = array.length;
 	var temporaryValue, randomIndex;
@@ -81,6 +83,8 @@ function shuffle(array){
 
 	return array;
 }
+
+/* Function to display the game board */
 
 function board(cards_list, nb_card, column){
     var table = document.getElementById('game')
@@ -114,6 +118,8 @@ function board(cards_list, nb_card, column){
     });
 }
 
+/* Function for flip card */
+
 function flipCard(card, cards_list){
     cardOpen.push(card)
 
@@ -129,6 +135,8 @@ function flipCard(card, cards_list){
         count()
     }
 }
+
+/* Function for check cards match */
 
 function check(){
     if(cardOpen[0].id == cardOpen[1].id){
@@ -150,6 +158,17 @@ function check(){
     }
 }
 
+/* Function for count moves */
+
+function count(){
+    var count = document.getElementById('count');
+
+    counter++;
+    count.innerHTML = counter
+}
+
+/* Functions for enable and disable cards */
+
 function enable(){
     var cards = document.querySelectorAll('.card-class');
 
@@ -170,6 +189,8 @@ function disable(){
 
 }
 
+/* Functions for check end and game over */
+
 function checkEnd(cards_list){
     if(cardMatch.length == cards_list.length){
         chronoStop()
@@ -187,13 +208,8 @@ function end_game(){
     $("#win-modal").modal();
 }
 
-function count(){
-    var count = document.getElementById('count');
 
-    counter++;
-    count.innerHTML = counter
-}
-
+/* Functions for stopwatch */
 
 var startTime = 0
 var start = 0
