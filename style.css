@@ -32,10 +32,24 @@ body {
       margin: 0 auto;
       padding-bottom: 20px;
       width: 27%;
-      /*background-color:rgba(0,0,0, 0.25);*/
       border: 0;
       border-radius: 20px;
 }
+
+/* Responsive for mobile */
+@media screen and (max-width: 414px){
+      #info {
+            width: 90%;
+      }
+}
+
+/* Responsive for tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+      #info {
+            width: 90%;
+      }
+}
+
 
 #counter p {
       display: inline;
@@ -67,6 +81,21 @@ body {
 #game img {
       width: 9vw;
 }
+
+/* Responsive for mobile */
+@media screen and (max-width: 414px){
+      #game img {
+            width: 100%;
+      }
+}
+
+/* Responsive for tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+      #game img {
+            width: 100%;
+      }
+}
+
 
 .disable {
 	pointer-events: none;

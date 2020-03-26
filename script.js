@@ -140,7 +140,6 @@ function flipCard(card, cards_list){
 
 function check(){
     if(cardOpen[0].id == cardOpen[1].id){
-        console.log('match !')
         cardMatch.push(cardOpen[0])
         cardMatch.push(cardOpen[1])
         setTimeout(function(){
