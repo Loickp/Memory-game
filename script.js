@@ -53,7 +53,7 @@ function startGame(mode){
     }
     else{
         board(cards_list_18, 18, 6)
-        header.style.marginTop = "50px"
+        header.style.marginTop = "15px"
         btn.style.display = "none";
         header_text.style.display = "none"
         info.style.backgroundColor = "rgba(0,0,0, 0.25)"
